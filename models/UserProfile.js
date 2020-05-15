@@ -1,10 +1,11 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const tutorProfileSchema = new Schema({
+const userProfileSchema = new Schema({
   user: { type: String, required: true },
-  categories: { type: [String], required: true },
-  ratings: { type: [String], required: true },
+  ratings: { type: [String] },
+  location: { type: String },
+  avatar: { type: String },
   createdAt: {
     type: Date,
     default: new Date(),
@@ -15,4 +16,4 @@ const tutorProfileSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model("TutorProfile", tutorProfileSchema);
+module.exports = mongoose.model("UserProfile", userProfileSchema);
