@@ -1,4 +1,4 @@
-const typeDef = `
+module.exports = `
 
   type User {
     id: ID!
@@ -16,6 +16,18 @@ const typeDef = `
     createdAt: String!
     updatedAt: String!
   }
+   extend type Query {
+    users: [User]
+    roles: [Role]
+  }
+   extend type Mutation {
+    createUser(
+      name: String
+      email: String
+      password: String
+      location: String
+      avatar: String
+      role: String
+    ): User
+  }
 `;
-
-module.exports = typeDef
