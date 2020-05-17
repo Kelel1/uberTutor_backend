@@ -21,4 +21,5 @@ app.listen({ port: 4000 }, () =>
 );
 // for debugging I guess
 app.get("/test", async (req, res) => {
+  res.send('test')
 });
