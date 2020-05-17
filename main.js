@@ -11,6 +11,7 @@ const resolvers = require('./graphql/resolvers')
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  playground: true, // maybe disable on full deployment
 });
 
 const app = express();
