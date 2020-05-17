@@ -12,6 +12,7 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   playground: true, // maybe disable on full deployment
+  introspection: true
 });
 
 const app = express();
