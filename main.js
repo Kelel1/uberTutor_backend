@@ -19,9 +19,6 @@ server.applyMiddleware({ app });
 app.listen({ port: 4000 }, () =>
   console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`)
 );
-// 5ec157163c46a830b8aadef3
+// for debugging I guess
 app.get("/test", async (req, res) => {
-  res.json({
-    profiles: await UserProfile.findOne({ user: "5ec157163c46a830b8aadef3" }),
-  });
 });
