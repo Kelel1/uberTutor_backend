@@ -3,7 +3,6 @@ const Rating = require("../../../models/Rating");
 const Roles = require("../../../models/Roles");
 const UserProfile = require("../../../models/UserProfile");
 
-
 module.exports = {
   Query: {
     users: async () => {
@@ -13,8 +12,8 @@ module.exports = {
   },
   Mutation: {
     createUser: async (
-      parent,
-      { name, email, password, location, avatar, categories, role }
+      _,
+      {user : { name, email, password, location, avatar, categories, role } }
     ) => {
       const user = await new User({
         name,
@@ -22,24 +21,20 @@ module.exports = {
         password,
         role,
       });
-      const selectedRole = Roles.findOne({ _id: role }, { name: 1, _id: 0 });
+      const selectedRole = await Roles.findOne({ _id: role }, { name: 1, _id: 0 });
       let profile = await new UserProfile({
         user: user._id,
         location,
         avatar,
       });
-      // if (selectedRole.name === "student") {
-      //   await profile.save();
-      // }
-      // if (selectedRole.name === "tutor") {
-      //   profile = await new UserProfile({
-      //     user: user._id,
-      //     location,
-      //     avatar,
-      //     categories,
-      //   });
-      //   await profile.save();
-      // }
+      if (selectedRole.name === "tutor") {
+        profile = await new UserProfile({
+          user: user._id,
+          location,
+          avatar,
+          categories,
+        });
+      }
       await profile.save();
       return user.save();
     },

@@ -1,5 +1,12 @@
 module.exports = `
-
+  input userInput {
+    name: String
+    email: String
+    password: String
+    location: String
+    avatar: String
+    role: String
+  }
   type User {
     id: ID!
     role: Role
@@ -12,6 +19,7 @@ module.exports = `
     user: String
     location: String
     avatar: String
+    categories: Category
     ratings: [Rating]
     createdAt: String!
     updatedAt: String!
@@ -22,12 +30,7 @@ module.exports = `
   }
    extend type Mutation {
     createUser(
-      name: String
-      email: String
-      password: String
-      location: String
-      avatar: String
-      role: String
+      user: userInput
     ): User
   }
 `;
