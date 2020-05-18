@@ -3,7 +3,7 @@ const Category = require("../../../models/Category");
 const Rating = require("../../../models/Rating");
 const Roles = require("../../../models/Role");
 const UserProfile = require("../../../models/UserProfile");
-const { register } = require('./helpers')
+const { register, login } = require('./helpers')
 
 module.exports = {
   Query: {
@@ -23,7 +23,7 @@ module.exports = {
       return await User.find( eval("f="+findString) );
     },
     login: async (_, { user }) => {
-      //return register(user)
+      return login(user)
     },
   },
   Mutation: {
@@ -46,6 +46,11 @@ module.exports = {
     },
     ratings: async (parent) => {
       return await Rating.find({user:parent.user});
+    }
+  },
+  AuthData: {
+    user: (parent) => { 
+      return parent
     }
   }
 };

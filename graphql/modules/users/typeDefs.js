@@ -10,6 +10,10 @@ module.exports = `
     "this has to be a list of category-IDs from the Category model"
     categories: [String]
   }
+  input loginInput {
+    email: String
+    password: String
+  }
   type User {
     id: ID!
     role: Role
@@ -28,6 +32,7 @@ module.exports = `
     updatedAt: String!
   }
   type AuthData {
+    id: ID
     user: User
     token: String
   }
@@ -37,7 +42,7 @@ module.exports = `
     userByEmail(email: String): User
     userByToken(token: String): User
     usersByFindString(findString: String): [User]
-    login(email: String, password: String): AuthData
+    login(user: loginInput): AuthData
   }
   extend type Mutation {
     """
@@ -65,6 +70,6 @@ module.exports = `
     """
     createUser(
       user: userInput
-    ): User
+    ): AuthData
   }
 `;

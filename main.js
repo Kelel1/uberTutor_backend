@@ -25,11 +25,16 @@ app.listen({  port }, () =>
 );
 // for debugging I guess
 app.get("/test", async (req, res) => {
-  const ratingCreate = await new require('./models/Rating')({
-    user:'test',
-    author:'test student',
-    rating: 4,
-    description: 'description from /test',
+  // const ratingCreate = await new require('./models/Rating')({
+  //   user:'test',
+  //   author:'test student',
+  //   rating: 4,
+  //   description: 'description from /test',
+  // });
+  
+  res.json({
+    created: await require("./models/User").find({
+      email: "tutor@hotmail.com",
+    }),
   });
-  res.json({ created: await ratingCreate.save() });
 });
