@@ -78,12 +78,24 @@ module.exports = `
     }    
     """
     usersByFindString(findString: String): [User]
+    """
+    Log in with email and password
+
+    **Example:**
+
+    {
+      login(user:{email: "auth@auth.auth", password:"12345"}) {
+        token
+        user {
+          id
+          name
+        }
+        
+      }
+    }
+    
+    """
     login(user: loginInput): AuthData
-    """
-    TODO!
-    not finished yet
-    """
-    login(email: String, password: String): AuthData
     """
     filters for atributes of user (you can pick which filters you want)\n
     **Examples:**\n
