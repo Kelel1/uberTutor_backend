@@ -81,21 +81,21 @@ module.exports = `
     """
     filters for atributes of user (you can pick which filters you want)\n
     **Examples:**\n
-    *queries for people tagged with maths*
+    *queries for people tagged with maths*\n
     query {
       usersByFilter(categories:["5ec28e24df65822b544343e0"]){
         name,
         profile {age, categories{name}}
       }
     }\n
-    *queries for people aged between 17-24*
+    *queries for people aged between 17-24*\n
     query {
       usersByFilter(agemin:17, agemax:24){
         name,
         profile {age, categories{name}}
       }
     }\n
-    *queries for people over 17 tagged with maths*
+    *queries for people over 17 tagged with maths*\n
     query {
       usersByFilter(agemin:17, categories:["5ec28e24df65822b544343e0"]){
         name,
