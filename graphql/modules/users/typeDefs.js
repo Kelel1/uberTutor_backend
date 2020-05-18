@@ -32,15 +32,55 @@ module.exports = `
     token: String
   }
   extend type Query {
+    """
+    query for all users\n
+    **Example:**\n
+    query {
+      users {
+        name
+      }
+    }
+    """
     users: [User]
+    """
+    searching for users by their name\n
+    **Example:**\n
+    query {
+      usersLike(name:"te"){name}
+    }    
+    """
     usersLike(name: String): [User]
+    """
+    get one user by its email\n
+    **Example:**\n
+    query {
+      userByEmail(email:"astudent@gmail.test"){name}
+    }    
+    """
     userByEmail(email: String): User
+    """
+    TODO!
+    not finished yet
+    """
     userByToken(token: String): User
+    """
+    brings the mongoDB interface to GraphQL. You can just write in there like it was JS.\n
+    **Example:**\n
+    query {
+      usersByFindString(findString:"{name:'test'}"){name}
+    }    
+    """
     usersByFindString(findString: String): [User]
+    """
+    TODO!
+    not finished yet
+    """
     login(email: String, password: String): AuthData
   }
   extend type Mutation {
     """
+    Creating new users with the userInput.\n
+    **Example:**\n
     mutation {
       createUser(
         user: {
