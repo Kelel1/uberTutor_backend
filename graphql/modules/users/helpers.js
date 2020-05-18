@@ -11,6 +11,7 @@ exports.register = async ({
   avatar,
   categories,
   role,
+  age
 }) => {
   const exists = await User.findOne({ email });
   if (exists) {
@@ -28,12 +29,14 @@ exports.register = async ({
     user: user._id,
     location,
     avatar,
+    age
   });
   if (selectedRole.name === "tutor") {
     profile = await new UserProfile({
       user: user._id,
       location,
       avatar,
+      age,
       categories,
     });
   }
@@ -46,7 +49,6 @@ exports.register = async ({
     ...user._doc,
   };
 };
-
 exports.login = async ({ email, password }) => {
   const user = await User.findOne({ email });
   console.log("useret", user);
