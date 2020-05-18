@@ -7,15 +7,18 @@ const { ApolloServer, gql } = require("apollo-server-express");
 setupDB();
 const typeDefs = require('./graphql/typeDefs');
 const resolvers = require('./graphql/resolvers');
+const isAuthed = require('./middleware/isAuthed')
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  context: async ({ req, res }) => ({ req, res }), // now we can access express objects from apollo context arg
   playground: true, // maybe disable on full deployment
-  introspection: true
+  introspection: true,
 });
 
 const app = express();
+app.use(isAuthed)
 server.applyMiddleware({ app });
 
 const port = process.env.PORT || 4000;

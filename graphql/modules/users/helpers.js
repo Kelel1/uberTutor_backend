@@ -2,7 +2,7 @@ const User = require("../../../models/User");
 const UserProfile = require("../../../models/UserProfile");
 const Roles = require("../../../models/Role");
 const jwt = require("jsonwebtoken");
-const bcrypt = require('bcrypt')
+const bcrypt = require("bcrypt");
 exports.register = async ({
   name,
   email,
@@ -13,8 +13,8 @@ exports.register = async ({
   role,
 }) => {
   const exists = await User.findOne({ email });
-  if (exists) { 
-      throw new Error("User already exists");
+  if (exists) {
+    throw new Error("User already exists");
   }
   password = await bcrypt.hash(password, 12);
   const user = await new User({
@@ -38,6 +38,7 @@ exports.register = async ({
     });
   }
   await profile.save();
+  await user.save();
   const token = generateAccessToken(user, "1hr");
   return {
     id: user.id,
@@ -48,6 +49,7 @@ exports.register = async ({
 
 exports.login = async ({ email, password }) => {
   const user = await User.findOne({ email });
+  console.log("useret", user);
   if (!user) throw new Error("Invalid Credentials");
   const match = await bcrypt.compare(password, user.password);
   if (!match) throw new Error("Invalid Credentials");
@@ -59,11 +61,17 @@ exports.login = async ({ email, password }) => {
   };
 };
 
+exports.getUserByToken = (token) => {
+  const user = jwt.verify(token, process.env.JWT_ACCESS_SECRET);
+  return user;
+};
+
 const generateAccessToken = (user, expiresIn) => {
   expiresIn = expiresIn || "1hr";
   const token = jwt.sign(
     {
       id: user.id,
+      name: user.name,
       email: user.email,
     },
     process.env.JWT_ACCESS_SECRET,
