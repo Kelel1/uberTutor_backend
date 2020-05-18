@@ -6,7 +6,7 @@ const express = require("express");
 const { ApolloServer, gql } = require("apollo-server-express");
 setupDB();
 const typeDefs = require('./graphql/typeDefs');
-const resolvers = require('./graphql/resolvers')
+const resolvers = require('./graphql/resolvers');
 
 const server = new ApolloServer({
   typeDefs,
@@ -25,5 +25,11 @@ app.listen({  port }, () =>
 );
 // for debugging I guess
 app.get("/test", async (req, res) => {
-  res.send('test')
+  const ratingCreate = await new require('./models/Rating')({
+    user:'test',
+    author:'test student',
+    rating: 4,
+    description: 'description from /test',
+  });
+  res.json({ created: await ratingCreate.save() });
 });

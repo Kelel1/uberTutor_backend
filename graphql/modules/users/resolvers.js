@@ -1,4 +1,5 @@
 const User = require("../../../models/User");
+const Category = require("../../../models/Category");
 const Rating = require("../../../models/Rating");
 const Roles = require("../../../models/Role");
 const UserProfile = require("../../../models/UserProfile");
@@ -32,4 +33,13 @@ module.exports = {
       return await Roles.findById(parent.role);
     },
   },
+  UserProfile: {
+    categories: async (parent) => {
+      console.log(parent.categories);
+      return await Category.find({_id: {$in:parent.categories} });
+    },
+    ratings: async (parent) => {
+      return await Rating.find({user:parent.user});
+    }
+  }
 };
