@@ -25,17 +25,22 @@ module.exports = {
     login: async (_, { user }) => {
       //return register(user)
     },
-    usersByFilter: async (parent, { categories, agemin, agemax }) => {
-      let allProfiles = await UserProfile.find({
-        categories: categories?{$in: categories}:null,
-        age: (agemin && agemin)?{$min:agemin, $max:agemax}:null
-      });
+    usersByFilter: async (parent, { categories, agemin, agemax, page, entriesPerPage}) => {
+      let findObj = {};
+      if(categories)findObj.categories={$in:categories};
+      if(agemin)findObj.age={$gte:agemin}
+      if(agemax)findObj.age={...findObj.age, $lte:agemax}
+
+      let allProfiles = await UserProfile.find(findObj);
       let allUserIDs = [];
+
       allProfiles.forEach(profile => {
         allUserIDs = [...allUserIDs, profile.user]
       });
-      console.log( await User.find({_id:{$in: allUserIDs}}));
-      return await User.find({_id:{$in: allUserIDs}});
+
+      if(!page)page=1;
+      if(!entriesPerPage)entriesPerPage=10;
+      return await User.find({_id:{$in: allUserIDs}}).skip((page-1)*entriesPerPage).limit(entriesPerPage);
     },
   },
   Mutation: {

@@ -78,7 +78,43 @@ module.exports = `
     not finished yet
     """
     login(email: String, password: String): AuthData
-    usersByFilter(categories: [String], agemin: Int, agemax: Int): [User]
+    """
+    filters for atributes of user (you can pick which filters you want)\n
+    **Examples:**\n
+    *queries for people tagged with maths*
+    query {
+      usersByFilter(categories:["5ec28e24df65822b544343e0"]){
+        name,
+        profile {age, categories{name}}
+      }
+    }\n
+    *queries for people aged between 17-24*
+    query {
+      usersByFilter(agemin:17, agemax:24){
+        name,
+        profile {age, categories{name}}
+      }
+    }\n
+    *queries for people over 17 tagged with maths*
+    query {
+      usersByFilter(agemin:17, categories:["5ec28e24df65822b544343e0"]){
+        name,
+        profile {age, categories{name}}
+      }
+    }    
+    """
+    usersByFilter(
+      "array of category-IDs"
+      categories: [String],
+      "minium age for searched tutor"
+      agemin: Int, 
+      "maximum age for searched tutor"
+      agemax: Int,
+      "page you are on right now (default is 1)"
+      page: Int,
+      "people per page (default is 10)"
+      entriesPerPage: Int
+    ): [User]
   }
   extend type Mutation {
     """
