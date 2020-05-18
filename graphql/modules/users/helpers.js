@@ -2,8 +2,7 @@ const User = require('../../../models/User')
 const UserProfile = require('../../../models/UserProfile')
 const Roles = require('../../../models/Role')
 
-exports.register = async ({ name, email, password, location, avatar, categories, role }) => {
-  console.log(categories)
+exports.register = async ({ name, email, password, location, avatar, categories, role, age }) => {
  const user = await new User({
         name,
         email,
@@ -15,12 +14,14 @@ exports.register = async ({ name, email, password, location, avatar, categories,
         user: user._id,
         location,
         avatar,
+        age,
       });
       if (selectedRole.name === "tutor") {
         profile = await new UserProfile({
           user: user._id,
           location,
           avatar,
+          age,
           categories,
         });
       }

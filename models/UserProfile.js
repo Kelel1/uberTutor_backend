@@ -7,6 +7,7 @@ const userProfileSchema = new Schema({
   ratings: { type: [String] },
   location: { type: String },
   avatar: { type: String },
+  age: {type: Number},
   createdAt: {
     type: Date,
     default: new Date(),

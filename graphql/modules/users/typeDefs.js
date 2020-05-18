@@ -6,6 +6,7 @@ module.exports = `
     password: String
     location: String
     avatar: String
+    age: Int
     role: String
     "this has to be a list of category-IDs from the Category model"
     categories: [String]
@@ -22,6 +23,7 @@ module.exports = `
     user: String
     location: String
     avatar: String
+    age: Int
     categories: [Category]
     ratings: [Rating]
     createdAt: String!
