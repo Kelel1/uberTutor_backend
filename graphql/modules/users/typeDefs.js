@@ -78,6 +78,7 @@ module.exports = `
     not finished yet
     """
     login(email: String, password: String): AuthData
+    usersByFilter(categories: [String], agemin: Int, agemax: Int): [User]
   }
   extend type Mutation {
     """
@@ -91,6 +92,7 @@ module.exports = `
           password: "super secret password"
           location: "testLocation"
           avatar: "prettyPicture"
+          age: 19
           role: "5ebf44978284563cf064ad88"
           categories: ["5ec28e24df65822b544343e0", "5ec28f49a8c4cf47cc645685"]
         }
