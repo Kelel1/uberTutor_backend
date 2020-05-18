@@ -9,6 +9,15 @@ module.exports = {
     users: async () => {
       return await User.find({});
     },
+    usersLike: async (parent, { name }) => {
+      return await User.find({ name: new RegExp(name, "i") });
+    },
+    userByEmail: async (parent, { email }) => {
+      return await User.findOne( { 'email': email } );
+    },
+    usersByFindString: async (parent, { findString }) => {
+      return await User.find( eval("f="+findString) );
+    }
   },
   Mutation: {
     createUser: async (_, { user }) => {

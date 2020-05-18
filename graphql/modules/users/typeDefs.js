@@ -26,6 +26,9 @@ module.exports = `
   }
   extend type Query {
     users: [User]
+    usersLike(name: String): [User]
+    userByEmail(email: String): User
+    usersByFindString(findString: String): [User]
   }
   extend type Mutation {
     createUser(
