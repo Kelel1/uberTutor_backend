@@ -14,7 +14,7 @@ module.exports = `
     email: String!
     name: String!
   }
-   type UserProfile {
+  type UserProfile {
     id: ID!
     user: String
     location: String
@@ -24,11 +24,10 @@ module.exports = `
     createdAt: String!
     updatedAt: String!
   }
-   extend type Query {
+  extend type Query {
     users: [User]
-    roles: [Role]
   }
-   extend type Mutation {
+  extend type Mutation {
     createUser(
       user: userInput
     ): User
