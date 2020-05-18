@@ -27,11 +27,17 @@ module.exports = `
     createdAt: String!
     updatedAt: String!
   }
+  type AuthData {
+    user: User
+    token: String
+  }
   extend type Query {
     users: [User]
     usersLike(name: String): [User]
     userByEmail(email: String): User
+    userByToken(token: String): User
     usersByFindString(findString: String): [User]
+    login(email: String, password: String): AuthData
   }
   extend type Mutation {
     """

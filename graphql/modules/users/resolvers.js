@@ -16,9 +16,15 @@ module.exports = {
     userByEmail: async (parent, { email }) => {
       return await User.findOne( { 'email': email } );
     },
+    userByToken: async (parent, { token }) => {
+      //return await User.findOne( { 'email': email } );
+    },
     usersByFindString: async (parent, { findString }) => {
       return await User.find( eval("f="+findString) );
-    }
+    },
+    login: async (_, { user }) => {
+      //return register(user)
+    },
   },
   Mutation: {
     createUser: async (_, { user }) => {
