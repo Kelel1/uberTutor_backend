@@ -11,6 +11,10 @@ module.exports = `
     "this has to be a list of category-IDs from the Category model"
     categories: [String]
   }
+  input loginInput {
+    email: String
+    password: String
+  }
   type User {
     id: ID!
     role: Role
@@ -30,6 +34,7 @@ module.exports = `
     updatedAt: String!
   }
   type AuthData {
+    id: ID
     user: User
     token: String
   }
@@ -73,6 +78,7 @@ module.exports = `
     }    
     """
     usersByFindString(findString: String): [User]
+    login(user: loginInput): AuthData
     """
     TODO!
     not finished yet
@@ -145,6 +151,6 @@ module.exports = `
     """
     createUser(
       user: userInput
-    ): User
+    ): AuthData
   }
 `;

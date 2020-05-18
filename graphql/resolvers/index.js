@@ -18,5 +18,6 @@ module.exports = {
   },
   User: { ...usersResolvers.User },
   UserProfile: { ...usersResolvers.UserProfile },
+  AuthData: { ...usersResolvers.AuthData },
   Rating: { ...ratingResolvers.Rating },
 };
