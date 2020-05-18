@@ -1,6 +1,6 @@
 const User = require("../../../models/User");
 const Rating = require("../../../models/Rating");
-const Roles = require("../../../models/Roles");
+const Roles = require("../../../models/Role");
 const UserProfile = require("../../../models/UserProfile");
 const { register } = require('./helpers')
 

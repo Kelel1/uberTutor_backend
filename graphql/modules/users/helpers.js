@@ -1,6 +1,6 @@
 const User = require('../../../models/User')
 const UserProfile = require('../../../models/UserProfile')
-const Roles = require('../../../models/Roles')
+const Roles = require('../../../models/Role')
 
 exports.register = async ({ name, email, password, location, avatar, categories, role }) => {
  const user = await new User({
