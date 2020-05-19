@@ -61,7 +61,7 @@ module.exports = {
       console.log(allUsers);
       
       
-      return allUsers//.slice((page-1)*entriesPerPage,(page-1)*entriesPerPage+entriesPerPage);
+      return allUsers.slice((page-1)*entriesPerPage,(page-1)*entriesPerPage+entriesPerPage);
     },
   },
   Mutation: {
