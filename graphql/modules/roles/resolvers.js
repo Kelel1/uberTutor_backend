@@ -5,7 +5,7 @@ const UserProfile = require("../../../models/UserProfile");
 
 module.exports = {
   Query: {
-    roles: () => Roles.find({}),
+    roles: () => Role.find({}),
   },
   Mutation: {
     createRole: async (parent, { name, description }) => {
