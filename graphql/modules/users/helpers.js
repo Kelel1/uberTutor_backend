@@ -68,6 +68,25 @@ exports.getUserByToken = (token) => {
   return user;
 };
 
+exports.userCompareName = (a, b, name) =>{
+  let Rexp = new RegExp(name, "i");
+  
+  if (a.name.match(Rexp).index < b.name.match(Rexp).index) {
+    return -1;
+  } else {
+    return 1;
+  }
+}
+
+exports.userProfileCompareCategoryMatches = (a, b, queryCategories) =>{
+  
+  if (a.categories.filter(value => queryCategories.includes(value)).length < b.categories.filter(value => queryCategories.includes(value)).length) {
+    return -1;
+  } else {
+    return 1;
+  }
+}
+
 const generateAccessToken = (user, expiresIn) => {
   expiresIn = expiresIn || "1hr";
   const token = jwt.sign(
